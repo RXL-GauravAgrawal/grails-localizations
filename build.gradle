@@ -10,7 +10,7 @@ buildscript {
 }
 
 version "0.1"
-group "grails.localizations"
+group "com.rxlogix"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -47,19 +47,16 @@ bootRun {
 }
 // enable if you wish to package this plugin as a standalone application
 bootRepackage.enabled = false
-grailsPublish {
-    // TODO: Provide values here
-    user = 'user'
-    key = 'key'
-    githubSlug = 'foo/bar'
-    license {
-        name = 'Apache-2.0'
+publishing {
+    repositories {
+        maven {
+            credentials {
+                username "admin" // Username
+                password "admin123" // Password
+            }
+            url "http://10.100.3.6:8080/nexus/content/repositories/common-component-snapshots/" // Repository URL
+        }
     }
-    title = "My Plugin"
-    desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
-    portalUser = ""
-    portalPassword = ""    
 }
 
 
