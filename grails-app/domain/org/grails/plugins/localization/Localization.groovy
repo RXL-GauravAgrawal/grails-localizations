@@ -31,6 +31,7 @@ class Localization implements Serializable {
         columns {
             code index: "localizations_idx"
             locale column: "loc"
+            text type: 'text'
         }
     }
 

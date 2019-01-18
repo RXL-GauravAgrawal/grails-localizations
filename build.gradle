@@ -9,8 +9,8 @@ buildscript {
     }
 }
 
-version "0.1"
-group "grails.localizations"
+version "0.2"
+group "com.rxlogix"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -47,19 +47,34 @@ bootRun {
 }
 // enable if you wish to package this plugin as a standalone application
 bootRepackage.enabled = false
-grailsPublish {
-    // TODO: Provide values here
-    user = 'user'
-    key = 'key'
-    githubSlug = 'foo/bar'
-    license {
-        name = 'Apache-2.0'
+publishing {
+    publications {
+        mavenJar(MavenPublication) {
+            pom.withXml {
+                def pomNode = asNode()
+                pomNode.dependencyManagement.replaceNode {}
+
+                // simply remove dependencies without a version
+                // version-less dependencies are handled with dependencyManagement
+                // see https://github.com/spring-gradle-plugins/dependency-management-plugin/issues/8 for more complete solutions
+                pomNode.dependencies.dependency.findAll {
+                    it.version.text().isEmpty()
+                }.each {
+                    it.replaceNode {}
+                }
+            }
+            from components.java
+        }
     }
-    title = "My Plugin"
-    desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
-    portalUser = ""
-    portalPassword = ""    
+    repositories {
+        maven {
+            credentials {
+                username "ankit.singh"
+                password "rxlogix"
+            }
+            url "http://10.100.3.6:8080/nexus/content/repositories/common-component-snapshots/"
+        }
+    }
 }
 
 
