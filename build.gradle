@@ -5,11 +5,11 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.8.2"
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
     }
 }
 
-version "0.2"
+version "0.2-3.3x"
 group "com.rxlogix"
 
 apply plugin:"eclipse"
@@ -38,7 +38,7 @@ dependencies {
     profile "org.grails.profiles:web-plugin"
     provided "org.grails:grails-plugin-services"
     provided "org.grails:grails-plugin-domain-class"
-    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.8.2"
+    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.14.2"
 }
 
 bootRun {
